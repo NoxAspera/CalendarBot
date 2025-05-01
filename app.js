@@ -1,15 +1,12 @@
 import 'dotenv/config';
 import express from 'express';
 import {
-  ButtonStyleTypes,
-  InteractionResponseFlags,
   InteractionResponseType,
   InteractionType,
-  MessageComponentTypes,
   verifyKeyMiddleware,
 } from 'discord-interactions';
-import { getRandomEmoji, DiscordRequest } from './utils.js';
-import { getShuffledOptions, getResult } from './game.js';
+import * as google from 'googleapis'
+import { getRandomEmoji} from './utils.js';
 
 // Create an express app
 const app = express();
@@ -17,7 +14,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 // To keep track of our active games
 const activeGames = {};
-
+const authClient = new google.Auth.OAuth2Client(
+    process.env.GOOGLE_CLIENT_ID, 
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URL
+)
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
  * Parse request body and verifies incoming requests using discord-interactions package
@@ -50,6 +51,25 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
           content: `hello world ${getRandomEmoji()}`,
         },
       });
+    }
+
+    if (name === 'login')
+    {
+        
+        
+        return res.send(
+            {
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                data: {
+                    content: `follow this link to login with google ${
+                        authClient.generateAuthUrl({
+                            access_type: 'online',
+                            scope: ['https://www.googleapis.com/auth/calendar']
+                        }
+                    )}`
+                }
+            }
+        )
     }
 
     console.error(`unknown command: ${name}`);
