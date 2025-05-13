@@ -1,5 +1,9 @@
 {
     "name": "calendar-bot",
+    "compatibility_flags":
+    [
+        "nodejs_compat"
+    ],
     "compatibility_date": "2025-05-13",
     "main": "./app.js"
 }
