@@ -1,5 +1,5 @@
 {
     "name": "calendar-bot",
     "compatibility_date": "2025-05-13",
-    "main": "src/app.js"
+    "main": "./app.js"
 }
