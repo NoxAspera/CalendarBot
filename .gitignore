@@ -1,3 +1,5 @@
-.env
+.dev.vars
 yarn.lock
+.prettierignore
+.prettierrc.json
 node_modules/
