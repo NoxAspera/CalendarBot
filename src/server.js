@@ -72,16 +72,17 @@ router.post('/', async (request, env) => {
           },
         });
       }
-      case LOGIN_TO_GOOGLE.data.name.toLowerCase():{
-        console.log(authClient.generateAuthUrl({
-          access_type: 'online',
-          scope: ['https://www.googleapis.com/auth/calendar']
-      }))
+      case LOGIN_TO_GOOGLE.name.toLowerCase():{
           return new JsonResponse(
             {
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
-                    content: `follow this link to login with google`
+                    content: `follow this link to login with google ${
+                        authClient.generateAuthUrl({
+                            access_type: 'online',
+                            scope: ['https://www.googleapis.com/auth/calendar']
+                        }
+                    )}`
                 }
             })
       }
