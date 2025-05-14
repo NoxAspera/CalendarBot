@@ -8,7 +8,8 @@ import {
   InteractionType,
   verifyKey,
 } from 'discord-interactions';
-import { TEST} from './commands.js';
+import { TEST, LOGIN_TO_GOOGLE} from './commands.js';
+import * as google from 'googleapis'
 import { InteractionResponseFlags } from 'discord-interactions';
 
 class JsonResponse extends Response {
@@ -24,6 +25,12 @@ class JsonResponse extends Response {
 }
 
 const router = AutoRouter();
+
+const authClient = new google.Auth.OAuth2Client(
+  process.env.GOOGLE_CLIENT_ID, 
+  process.env.GOOGLE_CLIENT_SECRET,
+  process.env.GOOGLE_REDIRECT_URL
+)
 
 /**
  * A simple :wave: hello page to verify the worker is working.
@@ -65,7 +72,20 @@ router.post('/', async (request, env) => {
           },
         });
       }
-
+      case LOGIN_TO_GOOGLE.data.name.toLowerCase():{
+          return new JsonResponse(
+            {
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                data: {
+                    content: `follow this link to login with google ${
+                        authClient.generateAuthUrl({
+                            access_type: 'online',
+                            scope: ['https://www.googleapis.com/auth/calendar']
+                        }
+                    )}`
+                }
+            })
+      }
       default:
         return new JsonResponse({ error: 'Unknown Type' }, { status: 400 });
     }

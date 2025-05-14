@@ -9,3 +9,9 @@ export const TEST =
   description: "Ping the bot"
 }
 
+export const LOGIN_TO_GOOGLE =
+{
+  name: "login_to_google",
+  description: "Generate the OAuth2 URL for google, do this before syncing"
+}
+
