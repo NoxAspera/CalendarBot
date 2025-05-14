@@ -81,12 +81,7 @@ router.post('/', async (request, env) => {
             {
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
-                    content: `follow this link to login with google ${
-                        authClient.generateAuthUrl({
-                            access_type: 'online',
-                            scope: ['https://www.googleapis.com/auth/calendar']
-                        }
-                    )}`
+                    content: `follow this link to login with google`
                 }
             })
       }
