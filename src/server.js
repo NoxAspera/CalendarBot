@@ -80,7 +80,8 @@ router.post('/', async (request, env) => {
                     content: `follow this link to login with google ${
                         authClient.generateAuthUrl({
                             access_type: 'online',
-                            scope: ['https://www.googleapis.com/auth/calendar']
+                            scope: ['https://www.googleapis.com/auth/calendar'],
+                            client_id: env.GOOGLE_CLIENT_ID
                         }
                     )}`
                 }
