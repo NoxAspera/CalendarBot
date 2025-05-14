@@ -81,7 +81,8 @@ router.post('/', async (request, env) => {
                         authClient.generateAuthUrl({
                             access_type: 'online',
                             scope: ['https://www.googleapis.com/auth/calendar'],
-                            client_id: env.GOOGLE_CLIENT_ID
+                            client_id: env.GOOGLE_CLIENT_ID,
+                            redirect_uri: "https://augustsabode.uk/oauth2flow"
                         }
                     )}`
                 }
