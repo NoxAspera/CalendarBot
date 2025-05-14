@@ -73,6 +73,10 @@ router.post('/', async (request, env) => {
         });
       }
       case LOGIN_TO_GOOGLE.data.name.toLowerCase():{
+        console.log(authClient.generateAuthUrl({
+          access_type: 'online',
+          scope: ['https://www.googleapis.com/auth/calendar']
+      }))
           return new JsonResponse(
             {
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
