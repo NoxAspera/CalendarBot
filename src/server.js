@@ -31,7 +31,7 @@ const router = AutoRouter();
       "https://www.googleapiscom/auth/calendar.readonly"
     ];
 
-const authClient = Auth.OAuth2Client(
+const authClient = new Auth.OAuth2Client(
   process.env.GOOGLE_CLIENT_ID, 
   process.env.GOOGLE_CLIENT_SECRET,
   "https://augustsabode.uk/oauth2flow"
