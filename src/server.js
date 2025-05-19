@@ -111,7 +111,7 @@ router.post('/', async (request, env) => {
                         }
                     )}`
                 }
-            })
+            });
       }
       case SYNC.name.toLowerCase():
         {
@@ -119,10 +119,12 @@ router.post('/', async (request, env) => {
           let response =""
           try
           {
+            console.log("attempting Request")
             response = await (calendar.calendarList.list()).data
           }
           catch(error)
           {
+            console.log(error)
             return new JsonResponse({
               type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
               data: {
@@ -130,6 +132,7 @@ router.post('/', async (request, env) => {
               },
             });
           }
+          console.log("cant return response")
           return new JsonResponse({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {
