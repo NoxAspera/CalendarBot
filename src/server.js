@@ -39,9 +39,8 @@ router.get('/', (request, env) => {
   return new Response(`👋 ${env.DISCORD_APPLICATION_ID}`);
 });
 
-router.get('/oauth2flow', (request, env) =>{
-
-  return new Response(request.json())
+router.get('/oauth2flow', async (request, env) => {
+  return new Response(await request.json())
 })
 
 /**
