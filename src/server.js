@@ -115,7 +115,7 @@ router.post('/', async (request, env) => {
       }
       case SYNC.name.toLowerCase():
         {
-          console.log("here")
+          console.log(await (calendar.calendarList.list()).data)
           let response =""
           try
           {
