@@ -40,7 +40,8 @@ router.get('/', (request, env) => {
 });
 
 router.get('/oauth2flow', async (request, env) => {
-  return new Response(await request.params.code)
+  request.params[code]
+  return new Response(await request.params[code])
 })
 
 /**
