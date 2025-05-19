@@ -9,7 +9,7 @@ import {
   verifyKey,
 } from 'discord-interactions';
 import { TEST, LOGIN_TO_GOOGLE} from './commands.js';
-import { google, OAuth2Client, calendar, Auth }from 'googleapis'
+import { google, Auth }from 'googleapis'
 import { InteractionResponseFlags } from 'discord-interactions';
 import { auth } from 'googleapis/build/src/apis/abusiveexperiencereport/index.js';
 
