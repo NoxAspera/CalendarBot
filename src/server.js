@@ -110,11 +110,10 @@ router.post('/', async (request, env) => {
       }
       case SYNC.name.toLowerCase():
         {
-          console.log(google.calendar(calendarOptions).calendarList)
           return new JsonResponse({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {
-              content: google.calendar(calendarOptions).calendarList,
+              content: await google.calendar(calendarOptions).calendarList.list,
             },
           });
         }
