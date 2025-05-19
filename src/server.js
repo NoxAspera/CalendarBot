@@ -41,7 +41,7 @@ router.get('/', (request, env) => {
 
 router.get('/oauth2flow', (request, env) =>{
 
-  return new Response(request)
+  return new Response(request.json())
 })
 
 /**
