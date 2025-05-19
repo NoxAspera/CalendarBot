@@ -39,6 +39,10 @@ router.get('/', (request, env) => {
   return new Response(`👋 ${env.DISCORD_APPLICATION_ID}`);
 });
 
+router.get('/oauth2flow', (request, en) =>{
+  return new Response('your winner')
+})
+
 /**
  * Main route for all requests sent from Discord.  All incoming messages will
  * include a JSON payload described here:
