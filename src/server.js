@@ -9,7 +9,7 @@ import {
   verifyKey,
 } from 'discord-interactions';
 import { TEST, LOGIN_TO_GOOGLE} from './commands.js';
-import { google, OAuth2Client, calendar }from 'googleapis'
+import { google, OAuth2Client, calendar, Auth }from 'googleapis'
 import { InteractionResponseFlags } from 'discord-interactions';
 import { auth } from 'googleapis/build/src/apis/abusiveexperiencereport/index.js';
 
@@ -27,7 +27,7 @@ class JsonResponse extends Response {
 
 const router = AutoRouter();
 
-const authClient = new OAuth2Client(
+const authClient = new Auth.OAuth2Client(
   process.env.GOOGLE_CLIENT_ID, 
   process.env.GOOGLE_CLIENT_SECRET,
   "https://augustsabode.uk/oauth2flow"
