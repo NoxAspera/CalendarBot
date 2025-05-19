@@ -111,7 +111,7 @@ router.post('/', async (request, env) => {
           let response =""
           try
           {
-            response = (await calendar.calendarList.list()).data
+            response = await (calendar.calendarList.list()).data
           }
           catch(error)
           {
