@@ -11,7 +11,6 @@ import {
 import { TEST, LOGIN_TO_GOOGLE} from './commands.js';
 import { google, Auth }from 'googleapis'
 import { InteractionResponseFlags } from 'discord-interactions';
-import { auth } from 'googleapis/build/src/apis/abusiveexperiencereport/index.js';
 
 class JsonResponse extends Response {
   constructor(body, init) {
@@ -27,7 +26,12 @@ class JsonResponse extends Response {
 
 const router = AutoRouter();
 
-const authClient = new Auth.OAuth2Client(
+     let scopes =[
+      "https://www.googleapiscom/auth/calendar",
+      "https://www.googleapiscom/auth/calendar.readonly"
+    ];
+
+const authClient = Auth.OAuth2Client(
   process.env.GOOGLE_CLIENT_ID, 
   process.env.GOOGLE_CLIENT_SECRET,
   "https://augustsabode.uk/oauth2flow"
@@ -98,7 +102,7 @@ router.post('/', async (request, env) => {
                     content: `follow this link to login with google ${
                         authClient.generateAuthUrl({
                             access_type: 'online',
-                            scope: ['https://www.googleapis.com/auth/calendar'],
+                            scope: scopes,
                             client_id: env.GOOGLE_CLIENT_ID,
                             redirect_uri: "https://augustsabode.uk/oauth2flow"
                         }
