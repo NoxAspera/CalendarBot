@@ -40,7 +40,7 @@ router.get('/', (request, env) => {
 });
 
 router.get('/oauth2flow', async ({ query }) => {
-  const {tokens} = await oauth2Client.getToken(code)
+  const {tokens} = await authClient.getToken(code)
   if (tokens)
   {
     authClient.setCredentials(tokens);
