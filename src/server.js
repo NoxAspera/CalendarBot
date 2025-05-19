@@ -2,7 +2,7 @@
  * The core server that runs on a Cloudflare worker.
  */
 
-import { AutoRouter } from 'itty-router';
+import { AutoRouter, withParams } from 'itty-router';
 import {
   InteractionResponseType,
   InteractionType,
@@ -39,9 +39,8 @@ router.get('/', (request, env) => {
   return new Response(`👋 ${env.DISCORD_APPLICATION_ID}`);
 });
 
-router.get('/oauth2flow', async (request, env) => {
-  request.params[code]
-  return new Response(await request.params[code])
+router.get('/oauth2flow', withParams, async ({code}) => {
+  return new Response(await code)
 })
 
 /**
