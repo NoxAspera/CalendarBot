@@ -27,8 +27,8 @@ class JsonResponse extends Response {
 const router = AutoRouter();
 
      let scopes =[
-      "https://www.googleapiscom/auth/calendar",
-      "https://www.googleapiscom/auth/calendar.readonly"
+      "https://www.googleapis.com/auth/calendar",
+      "https://www.googleapis.com/auth/calendar.readonly"
     ];
 
 const authClient = new Auth.OAuth2Client(
