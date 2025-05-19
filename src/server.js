@@ -108,12 +108,25 @@ router.post('/', async (request, env) => {
       }
       case SYNC.name.toLowerCase():
         {
-          return new JsonResponse({
-            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-            data: {
-              content: await calendar.calendarList.list()
-            },
-          });
+          try
+          {
+            let response = new JsonResponse({
+              type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+              data: {
+                content: await calendar.calendarList.list()
+              },
+            });
+            return response
+          }
+          catch(error)
+          {
+            return new JsonResponse({
+              type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+              data: {
+                content: error
+              },
+            });
+          } 
         }
       default:
         return new JsonResponse({ error: 'Unknown Type' }, { status: 400 });
