@@ -33,10 +33,7 @@ const authClient = new Auth.OAuth2Client(
   "https://augustsabode.uk/oauth2flow"
 )
 
-const calendarOptions = {
-  version: 'v3',
-  auth: authClient
-}
+const calendar = google.calendar('v3');
 
 /**
  * A simple :wave: hello page to verify the worker is working.
@@ -47,6 +44,7 @@ router.get('/', (request, env) => {
 
 router.get('/oauth2flow', async ({ query }) => {
   const {tokens} = await authClient.getToken(query.code)
+  google.options({auth: authClient})
   if (tokens)
   {
     authClient.setCredentials(tokens);
@@ -113,7 +111,7 @@ router.post('/', async (request, env) => {
           return new JsonResponse({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {
-              content: await google.calendar(calendarOptions).calendarList.list,
+              content: await calendar.calendarList.list()
             },
           });
         }
