@@ -29,7 +29,7 @@ const router = AutoRouter();
 const authClient = new google.Auth.OAuth2Client(
   process.env.GOOGLE_CLIENT_ID, 
   process.env.GOOGLE_CLIENT_SECRET,
-  process.env.GOOGLE_REDIRECT_URL
+  "https://augustsabode.uk/oauth2flow"
 )
 
 /**
