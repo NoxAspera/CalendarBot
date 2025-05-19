@@ -39,8 +39,8 @@ router.get('/', (request, env) => {
   return new Response(`👋 ${env.DISCORD_APPLICATION_ID}`);
 });
 
-router.get('/oauth2flow', withParams, ({code}) => {
-  return new Response(code)
+router.get('/oauth2flow', ({ query }) => {
+  return new Response(query.code)
 })
 
 /**
