@@ -43,7 +43,7 @@ router.get('/oauth2flow', async ({ query }) => {
   const {tokens} = await oauth2Client.getToken(code)
   if (tokens)
   {
-    oauth2Client.setCredentials(tokens);
+    authClient.setCredentials(tokens);
     return new Response("Login Success")
   }
   else
