@@ -67,6 +67,7 @@ router.get('/oauth2flow', async ({ query }) => {
  * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
  */
 router.post('/', async (request, env) => {
+  console.log("interaction logged")
   const { isValid, interaction } = await server.verifyDiscordRequest(
     request,
     env,
