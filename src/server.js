@@ -112,6 +112,7 @@ router.post('/', async (request, env) => {
       }
       case SYNC.name.toLowerCase():
         {
+          console.log("here")
           let response =""
           try
           {
