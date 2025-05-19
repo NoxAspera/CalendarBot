@@ -15,3 +15,8 @@ export const LOGIN_TO_GOOGLE =
   description: "Generate the OAuth2 URL for google, do this before syncing"
 }
 
+export const SYNC =
+{
+  name: "sync",
+  description: "sync calendar to events"
+}

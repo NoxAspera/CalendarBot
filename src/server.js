@@ -9,8 +9,9 @@ import {
   verifyKey,
 } from 'discord-interactions';
 import { TEST, LOGIN_TO_GOOGLE} from './commands.js';
-import * as google from 'googleapis'
+import { google, OAuth2Client, calendar }from 'googleapis'
 import { InteractionResponseFlags } from 'discord-interactions';
+import { auth } from 'googleapis/build/src/apis/abusiveexperiencereport/index.js';
 
 class JsonResponse extends Response {
   constructor(body, init) {
@@ -26,11 +27,16 @@ class JsonResponse extends Response {
 
 const router = AutoRouter();
 
-const authClient = new google.Auth.OAuth2Client(
+const authClient = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID, 
   process.env.GOOGLE_CLIENT_SECRET,
   "https://augustsabode.uk/oauth2flow"
 )
+
+const calendarOptions = {
+  version: 'v3',
+  auth: authClient
+}
 
 /**
  * A simple :wave: hello page to verify the worker is working.
@@ -102,6 +108,15 @@ router.post('/', async (request, env) => {
                 }
             })
       }
+      case SYNC.name.toLowerCase():
+        {
+          return new JsonResponse({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+              content: google.calendar(calendarOptions).calendarList,
+            },
+          });
+        }
       default:
         return new JsonResponse({ error: 'Unknown Type' }, { status: 400 });
     }

@@ -1,4 +1,4 @@
-import { TEST, LOGIN_TO_GOOGLE} from './commands.js';
+import { TEST, LOGIN_TO_GOOGLE, SYNC} from './commands.js';
 import dotenv from 'dotenv';
 import process from 'node:process';
 
@@ -34,7 +34,7 @@ const response = await fetch(url, {
     Authorization: `Bot ${token}`,
   },
   method: 'PUT',
-  body: JSON.stringify([TEST, LOGIN_TO_GOOGLE]),
+  body: JSON.stringify([TEST, LOGIN_TO_GOOGLE, SYNC]),
 });
 
 if (response.ok) {
