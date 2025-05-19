@@ -39,8 +39,18 @@ router.get('/', (request, env) => {
   return new Response(`👋 ${env.DISCORD_APPLICATION_ID}`);
 });
 
-router.get('/oauth2flow', ({ query }) => {
-  return new Response(query.code)
+router.get('/oauth2flow', async ({ query }) => {
+  const {tokens} = await oauth2Client.getToken(code)
+  if (tokens)
+  {
+    oauth2Client.setCredentials(tokens);
+    return new Response("Login Success")
+  }
+  else
+  {
+    return new Response("Login Failure")
+  }
+  
 })
 
 /**
